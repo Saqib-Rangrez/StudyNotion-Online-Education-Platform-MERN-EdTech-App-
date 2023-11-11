@@ -20,6 +20,7 @@ exports.createCourse = async (req, res) => {
             tags : _tags,
             status
         } = req.body;
+        console.log(req.body);
         
         // fetch thumbnail
         const thumbnail = req.files.thumbnailImage;
@@ -29,7 +30,7 @@ exports.createCourse = async (req, res) => {
         const tags = _tags.split(',').map(tag => tag.trim());
         const instructions = _instructions.split(',').map(instruction => instruction.trim());
         if (!status || status === undefined) {
-            status = "Drafted"
+            status = "Draft"
         }
 
         // Validation
@@ -198,7 +199,7 @@ exports.editCourse = async (req, res) => {
     try {
       const { courseId } = req.body
       const updates = req.body
-      // console.log(updates)
+      console.log(updates, updates["category"])
       const course = await Course.findById(courseId)
   
       if (!course) {
@@ -221,7 +222,12 @@ exports.editCourse = async (req, res) => {
         if (updates.hasOwnProperty(key)) {
           if (key === "tags" || key === "instructions") {
             course[key] = JSON.parse(updates[key])
-          } else {
+          }else if(key === "category"){
+            await Category.findByIdAndUpdate(course.category, {$pull : {courses : course._id}});
+            course[key] = updates[key];
+            await Category.findByIdAndUpdate(updates[key], {$push : {courses : course._id}});
+          } 
+          else {
             course[key] = updates[key]
           }
         }
@@ -383,7 +389,7 @@ exports.deleteCourse = async (req, res) => {
 
       // Delete course from its category
       const categoryId = course.category;
-      await Category.findByIdAndUpdate(categoryId, {$pull: {courses : categoryId}})
+      await Category.findByIdAndUpdate(categoryId, {$pull: {courses : courseId}})
   
       // Delete sections and sub-sections
       const courseSections = course.courseContent

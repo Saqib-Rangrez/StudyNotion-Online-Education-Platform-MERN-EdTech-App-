@@ -121,7 +121,7 @@ const CourseInformationForm = () => {
     formData.append("courseName",data.courseTitle);
     formData.append("courseDescription",data.courseShortDesc);
     formData.append("price",data.coursePrice);
-    formData.append("whatYouWillLearn",data.courseBenifits);
+    formData.append("whatYouWillLearn",data.courseBenefits);
     formData.append("tags",data.courseTags);
     formData.append("instructions",data.courseRequirements);
     formData.append("thumbnailImage",data.courseImage);
@@ -206,12 +206,12 @@ const CourseInformationForm = () => {
                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
               }}
               className="w-full border border-transparent focus:border-transparent outline-none rounded-[0.5rem] bg-richblack-700 p-[12px] text-richblack-5">
-            <option value="" disabled >
+            <option value="">
               Choose a Category
             </option>
               {!loading &&
                 courseCategories?.map((category,index) => (
-                  <option key={index} value={category?._id}>
+                  <option key={index} value={category?._id} onChange={() => setValue("courseCategory", category._id)}>
                     {category?.name}
                   </option>
                 ))

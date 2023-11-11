@@ -38,10 +38,11 @@ const CourseBuilderForm = () => {
     if(course?.courseContent.length === 0){
       toast.error("Please add atleast one section");
     }
-    if(course?.courseContent?.some((section) => section.subSection.length === 0)){
+    else if(course?.courseContent?.some((section) => section.subSection.length === 0)){
       toast.error("Please add atleast one lecture in each section");
-    }else
+    }else{
     dispatch(setStep(3));
+    }
   }
 
   // ***************Go Back Handle******************

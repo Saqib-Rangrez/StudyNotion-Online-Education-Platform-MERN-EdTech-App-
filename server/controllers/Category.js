@@ -84,8 +84,9 @@ exports.categoryPageDetails = async (req, res) => {
           populate: {
             path: "instructor",
         },
-        })
-        .exec();
+        }).exec();
+        console.log("Selected Category",selectedCategory.courses)
+        console.log("Selected category length",selectedCategory.courses.length);
 
         // validation
         if(!selectedCategory){

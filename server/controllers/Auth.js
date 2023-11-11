@@ -54,7 +54,7 @@ exports.sendOTP = async(req, res) => {
 
         // create an entry in db
         const otpBody = OTP.create(otpPayload);
-        console.log(otpBody);
+        // console.log(otpBody);
 
         // return response successful
         res.status(200).json({

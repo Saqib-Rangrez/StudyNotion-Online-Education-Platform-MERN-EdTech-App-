@@ -40,7 +40,7 @@ const Catalog = () => {
                 setCatalogPageData(res);
                 // console.log("Catalog Page Data",catalogPageData)
             }catch(error){
-                // console.log(error);
+                console.log(error);
             }
             setLoading(false);
         }
@@ -112,11 +112,11 @@ const Catalog = () => {
         {/* Section-2 */}
         <div className='w-11/12 max-w-maxContent mx-auto'>
             <div className='text-4xl font-semibold text-richblack-25'>
-                Top Course in
+                Top Course in 
                 <span>
-                { 
-                    (catalogPageData !== null && catalogPageData?.data?.selectedCategory !== undefined) &&
-                    `${catalogPageData?.data?.selectedCategory?.name}`
+                {
+                    (catalogPageData !== null && catalogPageData?.data?.differentCategory !== undefined) && 
+                    ` ${catalogPageData?.data?.differentCategory?.name}`
                 }
                 </span> 
             </div>

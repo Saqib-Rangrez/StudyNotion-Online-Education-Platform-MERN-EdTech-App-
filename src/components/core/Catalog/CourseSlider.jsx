@@ -11,6 +11,7 @@ import { Scrollbar } from 'swiper/modules';
 import Course_Card from './Course_Card';
 
 const CourseSlider = ({Courses}) => {
+    // console.log(Courses);
   return (
     <>
         {
